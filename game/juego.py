@@ -8,7 +8,8 @@ from entities.bala import Bala
 from config import SCREEN_WIDTH, SCREEN_HEIGHT, COLLISION_DISTANCE
 
 class Juego:
-    def __init__(self):
+    def __init__(self) -> None:
+        """Inicializa el juego, la pantalla y los elementos principales."""
         pygame.init()
         self.pantalla = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption("Invasion Espacial")
@@ -25,19 +26,23 @@ class Juego:
         self.fuente = pygame.font.Font('freesansbold.ttf', 32)
         self.fuente_final = pygame.font.Font('freesansbold.ttf', 40)
 
-    def mostrar_puntaje(self):
+    def mostrar_puntaje(self) -> None:
+        """Muestra el puntaje actual en pantalla."""
         texto = self.fuente.render(f'Puntaje: {self.puntaje}', True, (255, 255, 255))
         self.pantalla.blit(texto, (10, 10))
 
-    def texto_final(self):
+    def texto_final(self) -> None:
+        """Muestra el mensaje de fin de juego."""
         mi_fuente_final = self.fuente_final.render("JUEGO TERMINADO", True, (255, 255, 255))
         self.pantalla.blit(mi_fuente_final, (200, 250))
 
-    def detectar_colisiones(self, x1, y1, x2, y2):
+    def detectar_colisiones(self, x1: int, y1: int, x2: int, y2: int) -> bool:
+        """Detecta si hay una colisión entre dos objetos."""
         distancia = math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
         return distancia < COLLISION_DISTANCE
 
-    def ejecutar(self):
+    def ejecutar(self) -> None:
+        """Ejecuta el bucle principal del juego."""
         se_ejecuta = True
         while se_ejecuta:
             self.pantalla.blit(self.fondo, (0, 0))
